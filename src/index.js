@@ -46,7 +46,7 @@ class App extends React.Component {
 
     // console.log(term);
     this.setState({ videos: response.data.items });
-    this.setState({ firstVideo: response.data.items[0] });
+    this.setState({ firstVideo: response.data.items[1].id.videoId });
 
     console.log(response.data.items);
     console.log(response.data.items[1].id.videoId);
@@ -60,17 +60,13 @@ class App extends React.Component {
         <div class="ui segment">
           <div class="ui very relaxed two column grid">
             <div class="column">
-              <iframe
-                width="420"
-                height="315"
-                src={"https://www.youtube.com/embed/" + this.state.firstVideo.id.videoId}
-              ></iframe>
+              <iframe width="420" height="315" src={`https://www.youtube.com/embed/${this.state.firstVideo}`}></iframe>
+              <p></p>
             </div>
             <div class="column">
               {this.state.videos.map((data, index) => (
                 <div>
                   <img src={data.snippet.thumbnails.medium.url} alt={data.snippet.description} />
-                  {/* <iframe src={data.snippet.thumbnails.default.url} frameborder="0"></iframe> */}
                   <p>{data.snippet.title}</p>
                 </div>
               ))}
